@@ -12,7 +12,7 @@ extension UIAlertController {
     ///   - images: for content to select
     ///   - selection: type and action for selection of image/images
     
-    public func addPhotoLibraryPicker(flow: UICollectionViewScrollDirection, paging: Bool, selection: PhotoLibraryPickerViewController.Selection) {
+    public func addPhotoLibraryPicker(flow: UICollectionView.ScrollDirection, paging: Bool, selection: PhotoLibraryPickerViewController.Selection) {
         let selection: PhotoLibraryPickerViewController.Selection = selection
         var asset: PHAsset?
         var assets: [PHAsset] = []
@@ -98,7 +98,7 @@ final public class PhotoLibraryPickerViewController: UIViewController {
             fCollectionView!.register(ItemWithImage.self, forCellWithReuseIdentifier: String(describing: ItemWithImage.self))
             fCollectionView!.showsVerticalScrollIndicator = false
             fCollectionView!.showsHorizontalScrollIndicator = false
-            fCollectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+            fCollectionView!.decelerationRate = UIScrollView.DecelerationRate.fast
             if #available(iOS 11.0, *) {
                 fCollectionView!.contentInsetAdjustmentBehavior = .always
             }
@@ -129,7 +129,7 @@ final public class PhotoLibraryPickerViewController: UIViewController {
     
     // MARK: Initialize
     
-    required public init(flow: UICollectionViewScrollDirection, paging: Bool, selection: Selection) {
+    required public init(flow: UICollectionView.ScrollDirection, paging: Bool, selection: Selection) {
         super.init(nibName: nil, bundle: nil)
         
         self.selection = selection
@@ -191,7 +191,7 @@ final public class PhotoLibraryPickerViewController: UIViewController {
             let productName = Bundle.main.infoDictionary!["CFBundleName"]!
             let alert = UIAlertController(style: .alert, title: "Permission denied", message: "\(productName) does not have access to contacts. Please, allow the application to access to your photo library.")
             alert.addAction(title: "Settings", style: .destructive) { action in
-                if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
                     if #available(iOS 10.0, *) {
                         UIApplication.shared.open(settingsURL)
                     } else {

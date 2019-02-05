@@ -99,7 +99,7 @@ class ViewController: UIViewController {
     
     // MARK: Properties
     
-    fileprivate var alertStyle: UIAlertControllerStyle = .actionSheet
+    fileprivate var alertStyle: UIAlertController.Style = .actionSheet
     
     fileprivate lazy var segments: SegmentedControl = {
         let styles: [String] = ["Alert", "ActionSheet"]

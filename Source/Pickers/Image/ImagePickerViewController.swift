@@ -10,7 +10,7 @@ extension UIAlertController {
     ///   - images: for content to select
     ///   - selection: type and action for selection of image/images
     
-    public func addImagePicker(flow: UICollectionViewScrollDirection, paging: Bool, images: [UIImage], selection: ImagePickerViewController.SelectionType? = nil) {
+    public func addImagePicker(flow: UICollectionView.ScrollDirection, paging: Bool, images: [UIImage], selection: ImagePickerViewController.SelectionType? = nil) {
         let vc = ImagePickerViewController(flow: flow, paging: paging, images: images, selection: selection)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
@@ -70,7 +70,7 @@ final public class ImagePickerViewController: UIViewController {
             fCollectionView!.register(ItemWithImage.self, forCellWithReuseIdentifier: String(describing: ItemWithImage.identifier))
             fCollectionView!.showsVerticalScrollIndicator = false
             fCollectionView!.showsHorizontalScrollIndicator = false
-            fCollectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+            fCollectionView!.decelerationRate = UIScrollView.DecelerationRate.fast
             if #available(iOS 11.0, *) {
                 fCollectionView!.contentInsetAdjustmentBehavior = .never
             }
@@ -102,7 +102,7 @@ final public class ImagePickerViewController: UIViewController {
     
     // MARK: Initialize
     
-    required public init(flow: UICollectionViewScrollDirection, paging: Bool, images: [UIImage], selection: SelectionType?) {
+    required public init(flow: UICollectionView.ScrollDirection, paging: Bool, images: [UIImage], selection: SelectionType?) {
         super.init(nibName: nil, bundle: nil)
         self.images = images
         self.selection = selection

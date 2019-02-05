@@ -12,7 +12,7 @@ extension UIAlertController {
     ///   - message: alert controller's message (default is nil).
     ///   - defaultActionButtonTitle: default action button title (default is "OK")
     ///   - tintColor: alert controller's tint color (default is nil)
-    convenience public init(style: UIAlertControllerStyle, source: UIView? = nil, title: String? = nil, message: String? = nil, tintColor: UIColor? = nil) {
+    convenience public init(style: UIAlertController.Style, source: UIView? = nil, title: String? = nil, message: String? = nil, tintColor: UIColor? = nil) {
         self.init(title: title, message: message, preferredStyle: style)
         
         // TODO: for iPad or other views
@@ -48,7 +48,7 @@ extension UIAlertController {
     ///   - animated: set true to animate presentation of alert controller (default is true).
     ///   - vibrate: set true to vibrate the device while presenting the alert (default is false).
     ///   - completion: an optional completion handler to be called after presenting alert controller (default is nil).
-    public func show(animated: Bool = true, vibrate: Bool = false, style: UIBlurEffectStyle? = nil, completion: (() -> Void)? = nil) {
+    public func show(animated: Bool = true, vibrate: Bool = false, style: UIBlurEffect.Style? = nil, completion: (() -> Void)? = nil) {
         
         /// TODO: change UIBlurEffectStyle
         if let style = style {
@@ -72,7 +72,7 @@ extension UIAlertController {
     ///   - style: action style (default is UIAlertActionStyle.default)
     ///   - isEnabled: isEnabled status for action (default is true)
     ///   - handler: optional action handler to be called when button is tapped (default is nil)
-    public func addAction(image: UIImage? = nil, title: String, color: UIColor? = nil, style: UIAlertActionStyle = .default, isEnabled: Bool = true, handler: ((UIAlertAction) -> Void)? = nil) {
+    public func addAction(image: UIImage? = nil, title: String, color: UIColor? = nil, style: UIAlertAction.Style = .default, isEnabled: Bool = true, handler: ((UIAlertAction) -> Void)? = nil) {
         //let isPad: Bool = UIDevice.current.userInterfaceIdiom == .pad
         //let action = UIAlertAction(title: title, style: isPad && style == .cancel ? .default : style, handler: handler)
         let action = UIAlertAction(title: title, style: style, handler: handler)
@@ -106,8 +106,8 @@ extension UIAlertController {
     
     func setTitle(font: UIFont, color: UIColor) {
         guard let title = self.title else { return }
-        let attributes: [String: Any] = [NSFontAttributeName: font, NSForegroundColorAttributeName: color]
-        let attributedTitle = NSMutableAttributedString(string: title, attributes: attributes)
+        let attributes: [String: Any] = [convertFromNSAttributedStringKey(NSAttributedString.Key.font): font, convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): color]
+        let attributedTitle = NSMutableAttributedString(string: title, attributes: convertToOptionalNSAttributedStringKeyDictionary(attributes))
         setValue(attributedTitle, forKey: "attributedTitle")
     }
     
@@ -126,8 +126,8 @@ extension UIAlertController {
     
     func setMessage(font: UIFont, color: UIColor) {
         guard let message = self.message else { return }
-        let attributes: [String: Any] = [NSFontAttributeName: font, NSForegroundColorAttributeName: color]
-        let attributedMessage = NSMutableAttributedString(string: message, attributes: attributes)
+        let attributes: [String: Any] = [convertFromNSAttributedStringKey(NSAttributedString.Key.font): font, convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor): color]
+        let attributedMessage = NSMutableAttributedString(string: message, attributes: convertToOptionalNSAttributedStringKeyDictionary(attributes))
         setValue(attributedMessage, forKey: "attributedMessage")
     }
     
@@ -146,3 +146,14 @@ extension UIAlertController {
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}

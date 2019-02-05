@@ -95,7 +95,7 @@ final public class TelegramPickerViewController: UIViewController {
             fCollectionView!.allowsMultipleSelection = true
             fCollectionView!.showsVerticalScrollIndicator = false
             fCollectionView!.showsHorizontalScrollIndicator = false
-            fCollectionView!.decelerationRate = UIScrollViewDecelerationRateFast
+            fCollectionView!.decelerationRate = UIScrollView.DecelerationRate.fast
             if #available(iOS 11.0, *){
                 fCollectionView!.contentInsetAdjustmentBehavior = .never
             }
@@ -220,7 +220,7 @@ final public class TelegramPickerViewController: UIViewController {
             let productName = Bundle.main.infoDictionary!["CFBundleName"]!
             let alert = UIAlertController(style: .alert, title: "Permission denied", message: "\(productName) does not have access to contacts. Please, allow the application to access to your photo library.")
             alert.addAction(title: "Settings", style: .destructive) { action in
-                if let settingsURL = URL(string: UIApplicationOpenSettingsURLString) {
+                if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
                     if #available(iOS 10.0, *) {
                         UIApplication.shared.open(settingsURL)
                     } else {
