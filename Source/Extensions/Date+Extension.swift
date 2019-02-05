@@ -502,14 +502,14 @@ public extension Date {
     public init(
         calendar: Calendar? = Calendar.current,
         timeZone: TimeZone? = TimeZone.current,
-        era: Int? = Date().era,
-        year: Int? = Date().year,
-        month: Int? = Date().month,
-        day: Int? = Date().day,
-        hour: Int? = Date().hour,
-        minute: Int? = Date().minute,
-        second: Int? = Date().second,
-        nanosecond: Int? = Date().nanosecond) {
+        era: Int?,
+        year: Int?,
+        month: Int?,
+        day: Int?,
+        hour: Int?,
+        minute: Int?,
+        second: Int?,
+        nanosecond: Int?) {
         
         var components = DateComponents()
         components.calendar = calendar
