@@ -202,9 +202,9 @@ extension UIView {
 
 public extension UIView {
     
-    public typealias Configuration = (UIView) -> Swift.Void
+    typealias Configuration = (UIView) -> Swift.Void
     
-    public func config(configurate: Configuration?) {
+    func config(configurate: Configuration?) {
         configurate?(self)
     }
     
@@ -213,7 +213,7 @@ public extension UIView {
     /// - Parameters:
     ///   - corners: array of corners to change (example: [.bottomLeft, .topRight]).
     ///   - radius: radius for selected corners.
-    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         let maskPath = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let shape = CAShapeLayer()
         shape.path = maskPath.cgPath

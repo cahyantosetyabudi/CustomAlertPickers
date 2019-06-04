@@ -499,7 +499,7 @@ public extension Date {
     ///   - minute: Minute (default is current minute).
     ///   - second: Second (default is current second).
     ///   - nanosecond: Nanosecond (default is current nanosecond).
-    public init(
+    init(
         calendar: Calendar? = Calendar.current,
         timeZone: TimeZone? = TimeZone.current,
         era: Int?,
@@ -529,7 +529,7 @@ public extension Date {
     /// Create date object from ISO8601 string.
     ///
     /// - Parameter iso8601String: ISO8601 string of format (yyyy-MM-dd'T'HH:mm:ss.SSSZ).
-    public init(iso8601String: String) {
+    init(iso8601String: String) {
         // https://github.com/justinmakaila/NSDate-ISO-8601/blob/master/NSDateISO8601.swift
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -541,7 +541,7 @@ public extension Date {
     /// Create new date object from UNIX timestamp.
     ///
     /// - Parameter unixTimestamp: UNIX timestamp.
-    public init(unixTimestamp: Double) {
+    init(unixTimestamp: Double) {
         self.init(timeIntervalSince1970: unixTimestamp)
     }
     
@@ -549,7 +549,7 @@ public extension Date {
 
 public extension Date {
     /// SwiftRandom extension
-    public static func randomWithinDaysBeforeToday(_ days: Int) -> Date {
+    static func randomWithinDaysBeforeToday(_ days: Int) -> Date {
         let today = Date()
         let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         
@@ -572,7 +572,7 @@ public extension Date {
     }
     
     /// SwiftRandom extension
-    public static func random() -> Date {
+    static func random() -> Date {
         let randomTime = TimeInterval(arc4random_uniform(UInt32.max))
         return Date(timeIntervalSince1970: randomTime)
     }
