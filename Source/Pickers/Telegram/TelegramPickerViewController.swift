@@ -232,6 +232,8 @@ final public class TelegramPickerViewController: UIViewController {
                 self.alertController?.dismiss(animated: true)
             }
             alert.show()
+        @unknown default:
+            fatalError()
         }
     }
     
