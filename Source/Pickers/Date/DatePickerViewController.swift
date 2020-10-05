@@ -10,9 +10,23 @@ extension UIAlertController {
     ///   - minimumDate: minimum date of date picker
     ///   - maximumDate: maximum date of date picker
     ///   - action: an action for datePicker value change
-    
     public func addDatePicker(mode: UIDatePicker.Mode, date: Date?, minimumDate: Date? = nil, maximumDate: Date? = nil, action: DatePickerViewController.Action?) {
         let datePicker = DatePickerViewController(mode: mode, date: date, minimumDate: minimumDate, maximumDate: maximumDate, action: action)
+        set(vc: datePicker, height: 217)
+    }
+
+    /// Add a date picker
+    ///        ///
+    /// - Parameters:        /// - Parameters:
+    ///   - mode: date picker mode        ///   - mode: date picker mode
+    ///   - date: selected date of date picker        ///   - date: selected date of date picker
+    ///   - minimumDate: minimum date of date picker        ///   - minimumDate: minimum date of date picker
+    ///   - maximumDate: maximum date of date picker        ///   - maximumDate: maximum date of date picker
+    ///   - action: an action for datePicker value change        ///   - action: an action for datePicker value change
+    @available(iOS 13.4, *)
+    public func addDatePicker(mode: UIDatePicker.Mode, date: Date?, minimumDate: Date? = nil, maximumDate: Date? = nil, style: UIDatePickerStyle = .wheels, action: DatePickerViewController.Action?) {
+        let datePicker = DatePickerViewController(mode: mode, date: date, minimumDate: minimumDate, maximumDate: maximumDate, style: style ,action: action)
+
         set(vc: datePicker, height: 217)
     }
 }
@@ -34,6 +48,17 @@ final public class DatePickerViewController: UIViewController {
         datePicker.date = date ?? Date()
         datePicker.minimumDate = minimumDate
         datePicker.maximumDate = maximumDate
+        self.action = action
+    }
+
+    @available(iOS 13.4, *)
+    required init(mode: UIDatePicker.Mode, date: Date? = nil, minimumDate: Date? = nil, maximumDate: Date? = nil, style: UIDatePickerStyle, action: Action?) {
+        super.init(nibName: nil, bundle: nil)
+        datePicker.datePickerMode = mode
+        datePicker.date = date ?? Date()
+        datePicker.minimumDate = minimumDate
+        datePicker.maximumDate = maximumDate
+        datePicker.preferredDatePickerStyle = style
         self.action = action
     }
     

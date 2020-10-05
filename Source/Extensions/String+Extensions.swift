@@ -13,8 +13,7 @@ extension String {
     subscript (r: Range<Int>) -> String {
         let start = index(startIndex, offsetBy: r.lowerBound)
         let end = index(startIndex, offsetBy: min(r.upperBound, self.count))
-        let range: Range<Index> = start..<end
-        return String(self[range])
+        return String(self[start ..< end])
     }
     
     var containsAlphabets: Bool {

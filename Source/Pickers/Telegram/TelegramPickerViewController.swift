@@ -209,7 +209,7 @@ final public class TelegramPickerViewController: UIViewController {
                 self.checkStatus(completionHandler: completionHandler)
             }
             
-        case .authorized:
+        case .authorized, .limited:
             /// Authorization granted by user for this app.
             DispatchQueue.main.async {
                 self.fetchPhotos(completionHandler: completionHandler)
