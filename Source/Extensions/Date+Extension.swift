@@ -152,7 +152,7 @@ extension Date {
     }
     
     /// Nearest quarter to date.
-    var nearestHourQuarter: Date {
+    public var nearestHourQuarter: Date {
         var components = Calendar.current.dateComponents([.year, .month , .day , .hour , .minute], from: self)
         guard let min = components.minute else {
             return self
